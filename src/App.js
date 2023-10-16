@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import { decrement, increment, incrementByAmount } from "./redux/counterReducer";
 
 function App() {
+
+  // Using the reducer variable
+  const { count } = useSelector(state => state.counter);
+
+  // Using dispatch hook in order to run reducer functions
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="number" value={count} />
+      <button onClick={() => dispatch(increment())}>Increase +</button>
+      <button onClick={() => dispatch(decrement())}>Decrease -</button>
+      <button onClick={() => dispatch(incrementByAmount(20))}>Increment by 20++</button>
     </div>
   );
 }
